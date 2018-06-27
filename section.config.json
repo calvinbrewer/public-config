@@ -8,7 +8,10 @@
     "environments": {
         "Production": {
             "origin": {
-                "address": "maps.googleapis.com"
+                "address": "maps.googleapis.com",
+                "host_header": "maps.googleapis.com",
+                "tls_name": "maps.googleapis.com",
+                "enable_sni": true
             }
         },
         "Development": {
