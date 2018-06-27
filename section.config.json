@@ -3,6 +3,10 @@
         {
             "name": "varnish",
             "image": "varnish:6.0.0"
+        },
+        {
+            "name": "openresty",
+            "image": "openresty:1.13.6.1"
         }
     ],
     "environments": {

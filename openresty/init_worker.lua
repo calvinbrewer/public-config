@@ -1,0 +1,2 @@
+-- This file is automatically referenced via init_worker_by_lua_file when present:
+--  https://github.com/openresty/lua-nginx-module#init_worker_by_lua_file
