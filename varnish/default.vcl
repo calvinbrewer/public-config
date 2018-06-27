@@ -1,15 +1,4 @@
-# This is an extension on the default VCL that section.io has created to get
-# you up and running with Varnish.
-#
-# Please note: There is an underlying default Varnish behavior that occurs after the VCL logic
-# you see below. You can see the builtin code here
-# https://github.com/varnishcache/varnish-cache/blob/5.2/bin/varnishd/builtin.vcl
-#
-# See the VCL chapters in the Users Guide at https://www.varnish-cache.org/docs/
-# and http://varnish-cache.org/trac/wiki/VCLExamples for more examples.
 
-# Marker to tell the VCL compiler that this VCL has been adapted to the
-# new 4.0 format.
 vcl 4.0;
 
 # Tells Varnish the location of the upstream. Do not change .host and .port.
@@ -25,12 +14,6 @@ backend default {
 #import header; # see https://github.com/varnish/varnish-modules
 
 
-# Method: vcl_recv
-# Documentation: https://varnish-cache.org/docs/5.2/users-guide/vcl-built-in-subs.html#vcl-recv
-# Description: Happens before we check if we have this in cache already.
-#
-# Purpose: Typically you clean up the request here, removing cookies you don't need,
-# rewriting the request, etc.
 sub vcl_recv {
 
     # section.io default code
@@ -50,19 +33,9 @@ sub vcl_recv {
         /* Not cacheable by default */
         return (pass);
     }
+    
+    return (hash);
 }
-
-
-# Method: vcl_backend_fetch
-# Documentation: https://varnish-cache.org/docs/5.2/users-guide/vcl-built-in-subs.html#vcl-backend-fetch
-# Description: Called before sending the backend request.
-#
-# Purpose: Typically you alter the request for the backend here. Overriding to the
-# required hostname, upstream Proto matching, etc
-sub vcl_backend_fetch {
-    # No default section.io code for vcl_backend_fetch
-}
-
 
 # Method: vcl_backend_response
 # Documentation: https://varnish-cache.org/docs/5.2/users-guide/vcl-built-in-subs.html#vcl-backend-response
@@ -72,7 +45,15 @@ sub vcl_backend_fetch {
 # and other mistakes your backend may produce. This is also where you can manually
 # set cache TTL periods.
 sub vcl_backend_response {
-
+    if (beresp.status < 400) {
+        set beresp.ttl = 1h;
+        unset beresp.http.set-cookie;
+        return (deliver);
+    }
+    
+    set beresp.uncacheable = true;
+    set beresp.ttl = 120s;
+    return (deliver);
 }
 
 
@@ -105,5 +86,3 @@ sub vcl_hash {
     # Purpose: Split cache by HTTP and HTTPS protocol.
     hash_data(req.http.X-Forwarded-Proto);
 }
-
-include "section-features.vcl";
