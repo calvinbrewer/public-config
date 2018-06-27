@@ -1,0 +1,4 @@
+{
+    "parameter/http_max_hdr": 128,
+    "statics-enable-caching": "6h"
+}

@@ -1,0 +1,43 @@
+<!--
+This is a sample error page, for instructions see https://www.section.io/docs/custom-errors/
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Error</title>
+	<style type="text/css">
+		html {height:100%;}
+		body {
+			font:24px/30px Arial, Helvetica, sans-serif;
+			color:#111111;
+			background:#FFFFFF;
+			margin:0;
+			height:100%;
+			width:100%;
+		}
+		.wrapper {
+			max-width:900px;
+			margin: 20% auto 0 auto;
+			padding: 40px 20px 40px 20px;
+			-webkit-border-radius: 30px 20px 20px 20px;
+			-moz-border-radius: 30px 20px 20px 20px;
+			border-radius: 30px 20px 20px 20px;
+			border:1px solid #9E9E9E;
+			background-color:#FFFFFF;
+			-webkit-box-shadow: #B3B3B3 2px 2px 2px;
+			-moz-box-shadow: #B3B3B3 2px 2px 2px;
+			 box-shadow: #B3B3B3 2px 2px 2px;
+			text-align: center;
+		}
+        h1 { line-height: 0.8; }
+	</style>
+</head>
+<body>
+	<div class="wrapper">
+		<h1>Whoops, something went wrong</h1>
+
+		<p>Looks like the webserver is having problems, please try again soon.</p>
+	</div>
+</body>
+</html>

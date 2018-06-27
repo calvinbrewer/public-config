@@ -1,0 +1,20 @@
+{
+    "proxychain": [
+        {
+            "name": "varnish",
+            "image": "varnish:6.0.0"
+        }
+    ],
+    "environments": {
+        "Production": {
+            "origin": {
+                "address": "maps.googleapis.com"
+            }
+        },
+        "Development": {
+            "origin": {
+                "address": "maps.googleapis.com"
+            }
+        }
+    }
+}
