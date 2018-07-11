@@ -1,5 +1,5 @@
 local chunk, eof = gz.inflate_chunk()
 
-chunk = chunk:gsub("*", "maps.cjb.io")
+chunk = string.gsub(chunk, "maps.googleapis.com", "maps.cjb.io")
 
 gz.deflate_chunk(chunk)
